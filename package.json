@@ -1,0 +1,21 @@
+{
+  "name": "kontrolka",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "PFilip",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "libmeshctrl": "git+https://github.com/PFilip08/LibMeshCtrl",
+    "nodemon": "^3.1.4"
+  }
+}
