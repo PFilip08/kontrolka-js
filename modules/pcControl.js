@@ -27,7 +27,7 @@ async function shutdownAll() {
 
 async function shutdownXeo() {
     try {
-        api.get(url).then(res => {
+        api.get(url).then(() => {
             api.post(url+'/power?action=off');
         });
     } catch (error) {
@@ -53,7 +53,7 @@ async function startAll() {
 
 async function startXeo() {
     try {
-        api.get(url).then(res => {
+        api.get(url).then(() => {
             api.post(url+'/power?action=on');
         });
     } catch (error) {
@@ -72,7 +72,7 @@ async function startOpti() {
 
 async function resetXeo() {
     try {
-        api.get(url).then(res => {
+        api.get(url).then(() => {
             api.post(url+'/power?action=reset_hard');
         });
     } catch (error) {
