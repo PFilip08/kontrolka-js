@@ -26,9 +26,13 @@ async function shutdownAll() {
 }
 
 async function shutdownXeo() {
-    api.get(url).then(res => {
-        api.post(url+'/power?action=off');
-    }).catch(err=>console.log(err));
+    try {
+        api.get(url).then(res => {
+            api.post(url+'/power?action=off');
+        });
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 async function shutdownOpti() {
@@ -48,15 +52,19 @@ async function startAll() {
 }
 
 async function startXeo() {
-    api.get(url).then(res => {
-        api.post(url+'/power?action=on');
-    }).catch(err=>console.log(err));
+    try {
+        api.get(url).then(res => {
+            api.post(url+'/power?action=on');
+        });
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 async function startOpti() {
     try {
         const session = await Session.create(mcUri, options);
-        return await session.powerOffAMT(node, [5]);
+        return await await session.wake_devices(node, [5]);
     } catch (error) {
         console.log(error);
     }

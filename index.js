@@ -3,7 +3,6 @@ const app = express();
 const port = process.env.PORT || 8080;
 import 'dotenv/config';
 import buttonRouter from "./routes/button.router.js";
-import {statusOpti, statusXeo} from "./modules/pcStatus.js";
 import ledRouter from "./routes/led.router.js";
 
 app.use(express.static('public'));

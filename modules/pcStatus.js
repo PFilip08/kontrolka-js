@@ -2,7 +2,6 @@ import { Session } from "libmeshctrl";
 import axios from "axios";
 import {Agent} from "node:https";
 const mcUri = process.env.MC;
-const node = process.env.MC_NODE;
 const options = {
     user: process.env.MC_USER,
     password: process.env.MC_PASSWORD
