@@ -22,9 +22,13 @@ export async function buttonController(req, res) {
         } else if (button === 'sw1') {
             if (await statusXeo()) await shutdownXeo();
             else await startXeo();
+        } else if (button === 'sw1b') {
+            await resetXeo();
         } else if (button === 'sw2') {
             if (await statusOpti()) await shutdownOpti()
             else await startOpti();
+        } else if (button === 'sw2b') {
+            await resetOpti();
         } else if (button === 'sw3') {
             return res.status(500).send('not implemented');
         }

@@ -70,4 +70,23 @@ async function startOpti() {
     }
 }
 
-export { shutdownOpti, shutdownXeo, shutdownAll, startOpti, startXeo, startAll };
+async function resetXeo() {
+    try {
+        api.get(url).then(res => {
+            api.post(url+'/power?action=reset_hard');
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function resetOpti() {
+    try {
+        const session = await Session.create(mcUri, options);
+        return await await session.resetAMT(node, [5]);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export { shutdownOpti, shutdownXeo, shutdownAll, startOpti, startXeo, startAll, resetOpti, resetXeo };
