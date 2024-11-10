@@ -8,7 +8,8 @@ const options = {
 };
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
-let url = process.env.KVM;
+const urlKVM = process.env.KVM;
+const urlMain = process.env.MAIN;
 
 const api = axios.create({
     httpsAgent: new Agent(),
@@ -34,7 +35,7 @@ async function statusOpti() {
 
 async function statusXeo() {
     try {
-        const res = await api.get(url);
+        const res = await api.get(urlKVM);
         return res.data.result.leds.power;
     } catch (e) {
         console.log(e);
@@ -42,4 +43,15 @@ async function statusXeo() {
     }
 }
 
-export { statusOpti, statusXeo }
+async function statusMain() {
+    try {
+        const res = await api.get(urlMain+'/leds');
+        if (res.data.led1 === 'ON') return true;
+        else return false;
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
+}
+
+export { statusOpti, statusXeo, statusMain }

@@ -1,5 +1,5 @@
-import {shutdownAll, shutdownOpti, shutdownXeo, startAll, startOpti, startXeo} from "../modules/pcControl.js";
-import {statusOpti, statusXeo} from "../modules/pcStatus.js";
+import {resetOpti, resetXeo, shutdownAll, shutdownMain, shutdownOpti, shutdownXeo, startAll, startMain, startOpti, startXeo} from "../modules/pcControl.js";
+import {statusMain, statusOpti, statusXeo} from "../modules/pcStatus.js";
 
 export async function buttonController(req, res) {
     try {
@@ -30,7 +30,8 @@ export async function buttonController(req, res) {
         } else if (button === 'sw2b') {
             await resetOpti();
         } else if (button === 'sw3') {
-            return res.status(500).send('not implemented');
+            if (await statusMain()) await shutdownMain();
+            else await startMain();
         }
         return res.status(200).json(button);
     } catch (e) {

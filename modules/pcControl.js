@@ -10,7 +10,8 @@ const options = {
 // a to dlatego, bo MeshCommander ma untrusted certa :p
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
-let url = process.env.KVM;
+const urlKVM = process.env.KVM;
+const urlMain = process.env.MAIN;
 
 const api = axios.create({
     httpsAgent: new Agent(),
@@ -27,8 +28,8 @@ async function shutdownAll() {
 
 async function shutdownXeo() {
     try {
-        api.get(url).then(() => {
-            api.post(url+'/power?action=off');
+        api.get(urlKVM).then(() => {
+            api.post(urlKVM+'/power?action=off');
         });
     } catch (error) {
         console.log(error);
@@ -46,6 +47,16 @@ async function shutdownOpti() {
     }
 }
 
+async function shutdownMain() {
+    try {
+        api.get(urlMain).then(() => {
+            api.post(urlMain+'/button1');
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function startAll() {
     await startXeo();
     await startOpti();
@@ -53,8 +64,8 @@ async function startAll() {
 
 async function startXeo() {
     try {
-        api.get(url).then(() => {
-            api.post(url+'/power?action=on');
+        api.get(urlKVM).then(() => {
+            api.post(urlKVM+'/power?action=on');
         });
     } catch (error) {
         console.log(error);
@@ -70,10 +81,18 @@ async function startOpti() {
     }
 }
 
+async function startMain() {
+    try {
+        await shutdownMain();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function resetXeo() {
     try {
-        api.get(url).then(() => {
-            api.post(url+'/power?action=reset_hard');
+        api.get(urlKVM).then(() => {
+            api.post(urlKVM+'/power?action=reset_hard');
         });
     } catch (error) {
         console.log(error);
@@ -89,4 +108,14 @@ async function resetOpti() {
     }
 }
 
-export { shutdownOpti, shutdownXeo, shutdownAll, startOpti, startXeo, startAll, resetOpti, resetXeo };
+async function resetMain() {
+    try {
+        api.get(urlMain).then(() => {
+            api.post(urlMain+'/button2');
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export { shutdownOpti, shutdownXeo, shutdownMain, shutdownAll, startOpti, startXeo, startMain, startAll, resetOpti, resetXeo, resetMain };
