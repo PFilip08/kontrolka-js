@@ -49,9 +49,7 @@ async function shutdownOpti() {
 
 async function shutdownMain() {
     try {
-        api.get(urlMain).then(() => {
-            api.post(urlMain+'/button1');
-        });
+        api.post(urlMain+'/button1');
     } catch (error) {
         console.log(error);
     }
@@ -110,9 +108,7 @@ async function resetOpti() {
 
 async function resetMain() {
     try {
-        api.get(urlMain).then(() => {
-            api.post(urlMain+'/button2');
-        });
+        api.post(urlMain+'/button2');
     } catch (error) {
         console.log(error);
     }
