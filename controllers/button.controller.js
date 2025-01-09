@@ -19,15 +19,15 @@ export async function buttonController(req, res) {
             await shutdownAll();
         } else if (button === 'button3') {
             return res.status(500).send('not implemented');
-        } else if (button === 'sw1') {
+        } else if (button === 'sw1b') {
             if (await statusXeo()) await shutdownXeo();
             else await startXeo();
-        } else if (button === 'sw1b') {
+        } else if (button === 'sw1') {
             await resetXeo();
-        } else if (button === 'sw2') {
+        } else if (button === 'sw2b') {
             if (await statusOpti()) await shutdownOpti()
             else await startOpti();
-        } else if (button === 'sw2b') {
+        } else if (button === 'sw2') {
             await resetOpti();
         } else if (button === 'sw3') {
             if (await statusMain()) await shutdownMain();
