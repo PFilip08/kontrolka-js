@@ -41,7 +41,8 @@ async function shutdownOpti() {
         const session = await Session.create(mcUri, options);
 
         // console.log(await session.list_devices());
-        return await session.powerOffAMT(node, [5]);
+        await session.powerOffAMT(node, [5]);
+        await session.close();
     } catch (error) {
         console.log(error);
     }
@@ -73,7 +74,8 @@ async function startXeo() {
 async function startOpti() {
     try {
         const session = await Session.create(mcUri, options);
-        return await await session.wake_devices(node, [5]);
+        await session.wake_devices(node, [5]);
+        await session.close();
     } catch (error) {
         console.log(error);
     }
@@ -100,7 +102,8 @@ async function resetXeo() {
 async function resetOpti() {
     try {
         const session = await Session.create(mcUri, options);
-        return await await session.resetAMT(node, [5]);
+        await session.resetAMT(node, [5]);
+        await session.close();
     } catch (error) {
         console.log(error);
     }

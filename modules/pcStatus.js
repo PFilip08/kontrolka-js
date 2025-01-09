@@ -26,6 +26,7 @@ async function statusOpti() {
         let state = false
 
         if(data[0].pwr) state = true;
+        await session.close();
         return state;
     } catch (error) {
         console.log(error);
