@@ -1,7 +1,8 @@
 import {statusMain, statusOpti, statusXeo} from "../modules/pcStatus.js";
+import {statusRelay} from "../modules/powerStatus.js";
 
 export async function ledController(req, res) {
-    let led1 = false;
+    let led1 = await statusRelay(0);
     let led2 = true;
     let led3 = false;
 
